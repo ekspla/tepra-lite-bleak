@@ -1,17 +1,21 @@
 ﻿<div align="center">
   <img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/tepra.jpg?raw=true" width="300px">
   <h1>tepra_bleak_cli</h1>
-  <i>A stand alone CPython code to communicate with KING JIM TEPRA Lite LR30</i>
+  <i>A stand alone CPython code to communicate with KING JIM TEPRA Lite LR30 over BLE</i>
 </div>
 
+
+## Preface
+
 2026, modified by [ekspla](https://github.com/tepra-lite-bleak) using CPython/Bleak, 
-based on codes in [tepra-lite-esp32](https://github.com/puhitaku/tepra-lite-esp32).
-=====================================================
+based on codes in [tepra-lite-esp32](https://github.com/puhitaku/tepra-lite-esp32).  
+
 ## Introduction
 
-This is a stand alone/modified version of `tepracli` shown in 
-[tepra-lite-esp32](https://github.com/puhitaku/tepra-lite-esp32)
-by using CPython/Bleak.  No WiFi-BLE repeater (ESP32) is required. 
+This is a stand alone CPython/[Bleak](https://github.com/hbldh/bleak) version of code to 
+communicate with KING JIM TEPRA Lite LR30 over BLE. No WiFi-BLE repeater (ESP32) is required.  
+
+[Bleak](https://github.com/hbldh/bleak) supports Android, MacOS, Windows and Linux.  
 
 ## Install
 
