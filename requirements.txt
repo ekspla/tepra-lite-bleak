@@ -1,0 +1,6 @@
+importlib
+pathlib
+click
+qrcode
+pillow
+bleak
