@@ -44,3 +44,13 @@ Options:
   --help                        Show this message and exit.
 ```
 
+### Print examples
+
+|Options|Output|
+|:-|:-:|
+|`-m Hello`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example1.png?raw=true" height=80px>|
+|`-S 15 -m Hello`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example2.png?raw=true" height=80px>|
+|`-S 50 -m Hello`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example3.png?raw=true" height=80px>|
+|`-m Hello -m World`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example4.png?raw=true" height=80px>|
+|`-m Hello -s 10 -m World`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example5.png?raw=true" height=80px>|
+|`-q "http://example.com" -s 20 -m "http://example.com"`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example6.png?raw=true" height=80px>|
