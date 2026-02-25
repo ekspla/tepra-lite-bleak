@@ -54,20 +54,15 @@ class Tepra:
         print("Scanning for Bluetooth devices...")
         async with BleakScanner() as scanner:
             async def lookup_device():
-                n = 20
                 async for bd, ad in scanner.advertisement_data():
-                    #print(f" {n}. {bd!r} with {ad!r}")
+                    #print(f" {bd!r} with {ad!r}")
                     found = (bd.name or "").startswith(TARGET_NAME) or (ad.local_name or "").startswith(TARGET_NAME)
-                    if found:
-                        return bd
-                    n -= 1
-                    if n == 0:
-                        return None
+                    if found: return bd
             try:
                 device = await asyncio.wait_for(lookup_device(), timeout=30)
             except asyncio.TimeoutError:
                 print('Timeout 30 sec.')
-                return False
+                return None
             print(device)
             return device
 
