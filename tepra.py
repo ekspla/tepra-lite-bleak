@@ -31,10 +31,10 @@ def p(*b):
 class Tepra:
     def __init__(self):
         # Service and characteristics
-        #self._battery_chr = "0x2A19"
-        self._service = "0000FFF0-0000-1000-8000-00805F9B34FB"
-        self._tx = "0000FFF2-0000-1000-8000-00805F9B34FB"
-        self._rx = "0000FFF1-0000-1000-8000-00805F9B34FB"
+        #self._battery_chr = '0x2A19'
+        #self._print_svc = '0000FFF0-0000-1000-8000-00805F9B34FB'
+        self._tx = '0000FFF2-0000-1000-8000-00805F9B34FB'
+        self._rx = '0000FFF1-0000-1000-8000-00805F9B34FB'
         self.notification_data = bytearray()
         self._log = new_logger('TEPRA  :')
 
@@ -48,31 +48,31 @@ class Tepra:
         try:
             await client.start_notify(uuid, self.create_notification_handler())
         except Exception as e:
-            print(f"Failed to start notifications: {e}")
+            self._log('Failed to start notifications: {}', e)
 
     async def discover_device(self):
-        print("Scanning for Bluetooth devices...")
+        self._log('Scanning for Bluetooth devices...')
         async with BleakScanner() as scanner:
             async def lookup_device():
                 async for bd, ad in scanner.advertisement_data():
-                    #print(f" {bd!r} with {ad!r}")
-                    found = (bd.name or "").startswith(TARGET_NAME) or (ad.local_name or "").startswith(TARGET_NAME)
+                    #print(f' {bd!r} with {ad!r}')
+                    found = (bd.name or '').startswith(TARGET_NAME) or (ad.local_name or '').startswith(TARGET_NAME)
                     if found: return bd
             try:
                 device = await asyncio.wait_for(lookup_device(), timeout=30)
             except asyncio.TimeoutError:
-                print('Timeout 30 sec.')
                 return None
-            print(device)
+            self._log('Found {}', device)
             return device
 
     async def write(
         self, client: BleakClient, tx_data: bytearray, delay: float = 0.1
     ) -> bool:
+        """Write without response"""
         try:
             await client.write_gatt_char(self._tx, tx_data, False)
         except Exception as e:
-            print(f"Failed to write tx_data to characteristic: {e}")
+            self._log('Failed to write tx_data to characteristic: {}', e)
             return False
         await asyncio.sleep(delay)
         return True
@@ -94,7 +94,7 @@ class Tepra:
         try:
             await asyncio.wait_for(check_notification(), timeout=10)
         except asyncio.TimeoutError:
-            print('Timeout 10 sec.')
+            self._log('Timeout in awaiting notification.')
             return None
         return self.notification_data
 
@@ -126,7 +126,7 @@ class Tepra:
 
     async def _print(self, client: BleakClient, b: bytes, d: int) -> Tuple[bool, str]:
         if len(b) % 16 != 0:
-            return False, "insufficient length, image data length must be aligned to 16"
+            return False, 'insufficient length, image data length must be aligned to 16'
 
         # Get ready
         recv = await self.get_ready(client, depth=d)
@@ -135,7 +135,7 @@ class Tepra:
             return False, 'failed to get ready'
 
         i = 1
-        err = ""
+        err = ''
 
         for ofs in range(0, len(b) - 1, 16):
             self.notification_data = AWAIT_NEW_DATA
@@ -176,7 +176,7 @@ class Tepra:
 
         # End sending lines
         rx_data = await self.write_wait_notification(client, p(0xF0, 0x5D, 0x00), 0.05)
-        log_data = hexstr(rx_data) if rx_data is not None else "None"
+        log_data = hexstr(rx_data) if rx_data is not None else 'None'
         self._log('End sending lines: {}', log_data)
 
         self._log('Waiting for the print to finish...')
@@ -195,21 +195,23 @@ class Tepra:
     async def run(self, depth: int, encoded: bytes):
         device = await self.discover_device()
         if not device:
-            print(f"Tepra Lite not found")
+            self._log('TEPRA Lite was not found.')
             return
 
         async with BleakClient(device.address, timeout=60.0) as client:
             if client.is_connected:
-                print(f"Connected to {device.name}")
+                self._log('Connected to {}', device.name)
                 await asyncio.sleep(1)
 
                 # indication=False, notification=True
                 # Notifications are stopped automatically on disconnect.
                 await self.start_notify(client, self._rx)
-                print(f"Notifications started")
 
                 # Print labels here.
-                await self.print_lr30(client, b=encoded, d=depth)
+                success, reason = await self.print_lr30(client, b=encoded, d=depth)
+                if not success:
+                    self._log('Failed to print: {}', reason)
+                self._log('Disconnected.')
 
             else:
-                print(f"Failed to connect to {device.name}")
+                self._log('Failed to connect to TEPRA Lite.')
