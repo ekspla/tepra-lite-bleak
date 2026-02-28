@@ -8,8 +8,6 @@ import time
 import asyncio
 from typing import Optional, Tuple
 
-min_width = 84
-height = 64  # px
 AWAIT_NEW_DATA = bytearray(b'AwaitNewData')
 TARGET_NAME = ('LR30', 'TepraBLE')
 
@@ -215,3 +213,4 @@ class Tepra:
 
             else:
                 self._log('Failed to connect to TEPRA Lite.')
+
