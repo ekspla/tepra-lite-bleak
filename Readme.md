@@ -29,7 +29,7 @@ communicate with KING JIM TEPRA Lite LR30 *directly* over BLE. No WiFi-BLE repea
 
 Subcommands:
 
- - print: print strings and QR code
+ - print: print strings, QR code and image
 
 ### Print
 
