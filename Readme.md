@@ -7,7 +7,7 @@
 
 ## Preface
 
-2026, modified by [ekspla](https://github.com/tepra-lite-bleak) using CPython/Bleak, 
+2026, modified by [ekspla](https://github.com/ekspla/tepra-lite-bleak) using CPython/Bleak, 
 based on codes in [tepra-lite-esp32](https://github.com/puhitaku/tepra-lite-esp32).  
 
 ## Introduction
