@@ -110,7 +110,7 @@ class Tepra:
         d = 0x10 - depth if depth < 0 else 0x00 + depth
         self._log('Depth: {} ({:02x})', depth, d)
 
-        recv = await self.write_wait_notification(client, p(0xF0, 0x5B, d, 0x06), 0.05)
+        recv = await self.write_wait_notification(client, p(0xF0, 0x5B, d, 0x06), 0.1)
 
         if recv is None:
             return False
