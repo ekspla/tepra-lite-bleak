@@ -15,7 +15,9 @@ based on codes in [tepra-lite-esp32](https://github.com/puhitaku/tepra-lite-esp3
 This is a stand alone CPython/[Bleak](https://github.com/hbldh/bleak) version of code to 
 communicate with KING JIM TEPRA Lite LR30 *directly* over BLE. No WiFi-BLE repeater (ESP32) is required.  
 
-[Bleak](https://github.com/hbldh/bleak) supports Android, MacOS, Windows and Linux.  
+This version of code **does not work on Linux/Bluez** though [Bleak](https://github.com/hbldh/bleak), 
+which is a cross-platform software, supports Android, MacOS, Windows and Linux. **Confirmed to work on 
+Windows 10 and 11**.
 
 ## Install
 
