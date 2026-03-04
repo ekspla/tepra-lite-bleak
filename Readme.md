@@ -15,7 +15,7 @@ based on codes in [tepra-lite-esp32](https://github.com/puhitaku/tepra-lite-esp3
 This is a stand alone CPython/[Bleak](https://github.com/hbldh/bleak) version of code to 
 communicate with KING JIM TEPRA Lite LR30 *directly* over BLE. No WiFi-BLE repeater (ESP32) is required.  
 
-This version of code **does not work on Linux/Bluez**[<sup>1</sup>](#note-1) though 
+This version of code **does not work on Linux/BlueZ**[<sup>1</sup>](#note-1) though 
 [Bleak](https://github.com/hbldh/bleak), which is a cross-platform software, supports Android, MacOS, 
 Windows and Linux. **Confirmed to work on Windows 10 and 11**.
 
@@ -63,6 +63,6 @@ Options:
 
 ### Notes
 <a name="note-1"></a>
-1. Because the descriptor of the specific characteristc (0xFFF1) is hidden by bluetoothd/Bluez, 
-there is no way to set `notification=True` from the higher level APIs (Bluez/Bleak). There might be 
+1. Because the descriptor of the specific characteristic (0xFFF1) is hidden by bluetoothd/BlueZ, 
+there is no way to set `notification=True` from the higher level APIs (BlueZ/Bleak). There might be 
 a way to work around from the lower level (e.g. hcicmd, btmgmt, etc.) though.  
