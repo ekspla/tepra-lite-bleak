@@ -42,11 +42,13 @@ class Tepra:
 
         return notification_handler
 
-    async def start_notify(self, client: BleakClient, uuid: BleakGATTCharacteristic):
+    async def start_notify(self, client: BleakClient, uuid: BleakGATTCharacteristic) -> bool:
         try:
             await client.start_notify(uuid, self.create_notification_handler())
+            return True
         except Exception as e:
             self._log('Failed to start notifications: {}', e)
+            return False
 
     async def discover_device(self):
         self._log('Scanning for Bluetooth devices...')
@@ -203,7 +205,8 @@ class Tepra:
 
                 # indication=False, notification=True
                 # Notifications are stopped automatically on disconnect.
-                await self.start_notify(client, self._rx)
+                if not await self.start_notify(client, self._rx):
+                    return
 
                 # Print labels here.
                 success, reason = await self.print_lr30(client, b=encoded, d=depth)
@@ -213,4 +216,3 @@ class Tepra:
 
             else:
                 self._log('Failed to connect to TEPRA Lite.')
-
