@@ -61,7 +61,7 @@ Options:
 |`-m Hello -s 10 -m World`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example5.png?raw=true" height=80px>|
 |`-q "http://example.com" -s 20 -m "http://example.com"`|<img src="https://github.com/puhitaku/tepra-lite-esp32/blob/master/client/example6.png?raw=true" height=80px>|
 
-### Notes
+## Notes
 <a name="note-1"></a>
 1. Because the descriptor of the specific characteristic (0xFFF1) is hidden by bluetoothd/BlueZ, 
 there is no way to set `notification=True` from the higher level APIs (BlueZ/Bleak). There might be 
