@@ -65,4 +65,9 @@ Options:
 <a name="note-1"></a>
 1. Because the descriptor of the specific characteristic (0xFFF1) is hidden by bluetoothd/BlueZ, 
 there is no way to set `notification=True` from the higher level APIs (BlueZ/Bleak). There might be 
-a way to work around from the lower level (e.g. hcicmd, btmgmt, etc.) though.  
+a way to work around from the lower level (e.g. hci, btmgmt, etc.) though.  
+
+- Update 18 Mar. 2026  
+With a bit of modifications, the codes successfully worked on Linux/Bleak with 
+[bumble backend](https://github.com/vChavezB/bleak-bumble)/[Google/Bumble](https://github.com/google/bumble) 
+and TP-Link BT dongle \(UB400, v4.0, CSR8510 chip\) by using HCI over USB.
