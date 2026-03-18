@@ -164,7 +164,7 @@ class Tepra:
                 )
             )
 
-            await self.write(client, buf, 0.05)
+            await self.write(client, buf, 0.0)
 
             if i % 6 == 0:
                 self._log('Wait for a notification...')
