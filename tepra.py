@@ -100,7 +100,7 @@ class Tepra:
 
     async def get_ready(self, client: BleakClient, depth: int = 0) -> bool:
         recv = None
-        recv = await self.write_wait_notification(client, p(0xF0, 0x5A), 0.1)
+        recv = await self.write_wait_notification(client, p(0xF0, 0x5A), 0.2)
 
         if recv is None:
             return False
@@ -175,14 +175,14 @@ class Tepra:
             i += 1
 
         # End sending lines
-        rx_data = await self.write_wait_notification(client, p(0xF0, 0x5D, 0x00), 0.05)
+        rx_data = await self.write_wait_notification(client, p(0xF0, 0x5D, 0x00), 0.1)
         log_data = hexstr(rx_data) if rx_data is not None else 'None'
         self._log('End sending lines: {}', log_data)
 
         self._log('Waiting for the print to finish...')
         done = False
         while not done:
-            rx_data = await self.write_wait_notification(client, p(0xF0, 0x5E), 0.05)
+            rx_data = await self.write_wait_notification(client, p(0xF0, 0x5E), 0.1)
             if rx_data is None: return False, 'received an invalid reply: None'
             elif len(rx_data) < 4:
                 self._log('Received an invalid reply: {}', hexstr(rx_data))
@@ -198,7 +198,7 @@ class Tepra:
             self._log('TEPRA Lite was not found.')
             return
 
-        async with BleakClient(device.address, timeout=60.0) as client:
+        async with BleakClient(device, timeout=60.0) as client:
             if client.is_connected:
                 self._log('Connected to {}', device.name)
                 await asyncio.sleep(1)
