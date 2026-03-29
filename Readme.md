@@ -70,7 +70,7 @@ a way to work around from the lower level (e.g. hci, btmgmt, etc.) though.
 - Update 18 Mar. 2026  
 With a bit of modifications, the codes successfully worked on Linux/Bleak with 
 [bumble backend](https://github.com/vChavezB/bleak-bumble) / [Google Bumble](https://github.com/google/bumble) 
-and TP-Link BT dongle \(UB400, v4.0, CSR8510 chip\) by using HCI over USB.  
+and TP-Link BT dongles \(UB400, v4.0, CSR8510 chip and UB500, v5.3, RTL8761 chip\) by using HCI over USB (HCI H2).  
 The Bumble/Bleak combination also successfully worked with 
 [a home made HCI H4 USB-serial dongle](https://github.com/ekspla/micropython_aioble_examples#esp32-chip-as-a-usb-bluetooth-dongle-hci-h4-for-use-with-unix-port-linux-of-micropython-and-aioble)
 on Linux.
