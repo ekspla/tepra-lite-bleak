@@ -17,7 +17,11 @@ communicate with KING JIM TEPRA Lite LR30 *directly* over BLE. No WiFi-BLE repea
 
 This version of code **does not work on Linux/BlueZ**[<sup>1</sup>](#note-1) though 
 [Bleak](https://github.com/hbldh/bleak), which is a cross-platform software, supports Android, MacOS, 
-Windows and Linux. **Confirmed to work on Windows 10 and 11**.
+Windows (>=8.1) and Linux. **Confirmed to work as it is on Windows 10 and 11**.  
+
+By using [Bleak-Bumble](https://github.com/ekspla/bleak-bumble_dev_host_mode) and 
+[Google-Bumble's](https://github.com/google/bumble) Bluetooth host stack, the code confirmed to work 
+on **Linux** and **also on Windows 7 sp1**.   
 
 ## Install
 
@@ -68,8 +72,8 @@ there is no way to set `notification=True` from the higher level APIs (BlueZ/Ble
 a way to work around from the lower level (e.g. hci, btmgmt, etc.) though.  
 
 - Update 18 Mar. 2026  
-With a bit of modifications, the codes successfully worked on Linux/Bleak with 
-[bumble backend](https://github.com/vChavezB/bleak-bumble) / [Google Bumble](https://github.com/google/bumble) 
+With a bit of modifications, the codes successfully worked on Linux/Bleak and Windows7/Bleak with 
+[bumble backend](https://github.com/ekspla/bleak-bumble_dev_host_mode) / [Google Bumble](https://github.com/google/bumble) 
 and TP-Link BT dongles \(UB400, v4.0, CSR8510 chip and UB500, v5.3, RTL8761 chip\) by using HCI over USB (HCI H2).  
 The Bumble/Bleak combination also successfully worked with 
 [a home made HCI H4 USB-serial dongle](https://github.com/ekspla/micropython_aioble_examples#esp32-chip-as-a-usb-bluetooth-dongle-hci-h4-for-use-with-unix-port-linux-of-micropython-and-aioble)
