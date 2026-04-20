@@ -20,7 +20,7 @@ This version of code **does not work on Linux/BlueZ**[<sup>1</sup>](#note-1) tho
 Windows (>=8.1) and Linux. **Confirmed to work as it is on Windows 10 and 11**.  
 
 By using [Bleak-Bumble](https://github.com/ekspla/bleak-bumble_dev_host_mode) and 
-[Google-Bumble's](https://github.com/google/bumble) Bluetooth host stack, the code confirmed to work 
+[Google-Bumble's](https://github.com/google/bumble) Bluetooth host stack, the code was confirmed to work 
 on **Linux** and **also on Windows 7 sp1**.   
 
 ## Install
